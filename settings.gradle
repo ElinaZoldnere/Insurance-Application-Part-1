@@ -1,0 +1,4 @@
+rootProject.name = 'Insurance_Application_Java_2_part_1'
+
+include 'v1'
+include 'v2'
