@@ -59,11 +59,12 @@ transferred between the interface layer and the core logic via converter classes
 immutable Data Transfer Objects (DTOs) for use within the core layer, and then convert the core layer’s output back 
 into a format suitable for the user interface.
 
-Communication between different core modules is done through abstract interfaces, ensuring loose coupling between 
+
+- Communication between different core modules is done through abstract interfaces, ensuring loose coupling between 
 different parts of the core logic.
-Communication between the core layer and the user interface layer is also done through abstract interfaces, maintaining 
+- Communication between the core layer and the user interface layer is also done through abstract interfaces, maintaining 
 separation between the core business logic and the user interface.
-Communication between the core layer and the database is managed via repository interfaces with default Spring Data
+- Communication between the core layer and the database is managed via repository interfaces with default Spring Data
 JPA implementations.
 
 The v2 version is designed to ensure backward compatibility with v1, allowing to use both versions of user interface.
