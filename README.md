@@ -27,8 +27,9 @@ new requirements, leading to the necessity for refactoring or redesigning parts 
 - JAR, publishing and scheduled XML export.
 
 ## Good Practices
-- Hexagonal Architecture (ports and adapters) for version v2 application design.
-- Converter (adapter) classes for transferring data between layers.
+- Adoption of Hexagonal Architecture Principles for version v2 application design, with an emphasis on decoupling the 
+core business logic from external concerns like the user interface.
+- Converter (adapter) classes for transferring data between user interface layer and core layer.
 - Immutable Data Transfer Objects (DTOs) for data exchange (Java Records).
 - SOLID principles for flexibility and maintainability.
 - Inversion of Control (IoC) for decoupling object creation and management from business logic.
@@ -52,15 +53,23 @@ approach.
 interface layer. During the development process, new user interface requirements emerged, revealing that the initial 
 design lacked the flexibility needed to accommodate these changes without modifying core business logic.
 
-- v2: To address this issue, v2 was developed using a hexagonal (ports and adapters) architecture. In this design, the 
-core business logic is decoupled from the user interface layer. Data is transferred between the interface layer and the 
-core logic via converter classes, which transform the incoming data into immutable Data Transfer Objects (DTOs) for use 
-within the core layer, and then convert the core layer’s output back into a format suitable for the interface.
+- v2: To address this issue, v2 was developed with elements of hexagonal (ports and adapters) architecture. In this 
+design, the core business logic is decoupled from the user interface layer by using converter classes. Data is 
+transferred between the interface layer and the core logic via converter classes, which transform the incoming data into 
+immutable Data Transfer Objects (DTOs) for use within the core layer, and then convert the core layer’s output back 
+into a format suitable for the user interface.
+
+Communication between different core modules is done through abstract interfaces, ensuring loose coupling between 
+different parts of the core logic.
+Communication between the core layer and the user interface layer is also done through abstract interfaces, maintaining 
+separation between the core business logic and the user interface.
+Communication between the core layer and the database is managed via repository interfaces with default Spring Data
+JPA implementations.
 
 The v2 version is designed to ensure backward compatibility with v1, allowing to use both versions of user interface.
 
-## Project Model with C4 Component Diagram
-![C4_Container_view](v2/documentation/c4_diagrams/C4_Component_view.png)
+## Version v2 Model with C4 Component Diagram
+![v2_C4_model_component_view](v2/documentation/c4_diagrams/v2_C4_model_component_view.png)
 
 ## Future Perspectives
 The course contains also the second part I am enrolled in, which incorporates such technologies as microservices, 
