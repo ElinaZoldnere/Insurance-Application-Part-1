@@ -2,47 +2,71 @@
 This repository contains an insurance calculator application developed during a virtual internship as part of the
 **JavaGuru 'Java 2 - Agile Web Development'** course.<br>
 ![JavaGuru](assets/JavaGuru.png)<br>
-The project was built to apply various technologies in a practical
-context while following an Agile development approach.<br>
+The project was built to apply various technologies in a practical Context while following an Agile development 
+approach.<br>
 The application is developed with Java Spring Boot and uses Gradle for building and dependency management.
 
 ## Overview
 The insurance calculator application is a simple web service that calculates insurance premiums based on user
-requests. The project focuses on building a robust easily modifiable design by following the principles of hexagonal
-architecture, implementing data persistence, REST APIs and a simple web interface. The aim was to explore the Spring
-ecosystem and become familiar with commonly used tools.
+requests. The project focuses on building a robust easily modifiable design, implementing data persistence, REST APIs 
+and a simple web interface. The aim was to explore the Spring ecosystem and become familiar with commonly used tools.
 
 Development was done step-by-step in nearly 200 tasks, each addressing either the implementation of a specific
 feature or a refactor to improve the codebase. Each task built on the previous work, allowing to observe the
 application evolve over time. As the project progressed, some earlier design decisions required adjustment to meet
 new requirements, leading to the necessity for refactoring or redesigning parts of the system.
 
+## Key Features
+- Spring Boot application, build and dependency management with Gradle.
+- Implemented business logic for calculating several types of insurance premiums.
+- Version v2 backward compatibility with version v1.
+- Secured REST API endpoints for interacting with the application.
+- Simple web interface (Thymeleaf) for user interaction.
+- Authentication and authorization with Spring Security Basic Auth.
+- Data persistence using MySQL database and migrations with Liquibase.
+- JAR, publishing and scheduled XML export.
+
+## Good Practices
+- Hexagonal Architecture (ports and adapters) for version v2 application design.
+- Converter (adapter) classes for transferring data between layers.
+- Immutable Data Transfer Objects (DTOs) for data exchange (Java Records).
+- SOLID principles for flexibility and maintainability.
+- Inversion of Control (IoC) for decoupling object creation and management from business logic.
+- Unit, integration, acceptance testing with good coverage, and simple load testing.
+
 ## Technologies Used
 The project utilizes the following core technologies:
+- Java, Spring, Spring Boot, Gradle, JPA, JDBC, ORM, Hibernate, MySQL, H2, Liquibase, JUnit, Mockito, MVC, HTML, 
+Thymeleaf, IntelliJ IDEA, Git, GitHub, CI, Lombok, Postman, OpenAPI, logging, Spring-based caching,
+scheduled jobs, XML exports, JAR/WAR packaging, publishing, and handling JSON data formats, among other features.
 
-- Java, Spring, & Spring Boot for the backend development.
-- Gradle for dependency management and builds.
-- Hexagonal Architecture and Inversion of Control (IoC) for core application design.
-- REST APIs to handle communication between the client or users and server.
-- JPA, JDBC, ORM, & Hibernate for data persistence and database interactions.
-- MySQL & H2 databases for data storage.
-- JUnit & Mockito for testing the application’s functionality.
-- MVC, HTML, & Thymeleaf for rendering the web interface.
-- Other tools - IntelliJ IDEA as the development environment, Liquibase for database migrations, Git and GitHub for
-  version control, Continuous Integration (CI) setup, Lombok to reduce boilerplate code, Postman and OpenAPI for API
-  testing.
-- Project also incorporates unit, integration, acceptance and simple load testing, logging, Spring-based caching,
-  scheduled jobs, XML exports, JAR/WAR packaging, publishing, and handling JSON data formats,a mong other features.
+In addition to the core requirements, I explored and incorporated following technologies based on my personal interest:
 
-## Additional Features
-In addition to the core requirements, I added the following features to the project based on my personal interest:
+- Spring Security (Basic Authentication) for REST endpoints, Java Records for DTOs, Parameterized and Dynamic Tests, 
+Template Method Pattern, Aspect-Oriented Programming (AspectJ) for logging, Caffeine for caching.
 
-- Spring Security (Basic Authentication) for securing REST endpoints.
-- Java Records to create immutable Data Transfer Objects (DTOs).
-- Parameterized and Dynamic Tests to increase flexibility and coverage in testing.
-- Template Method Pattern for better code organization where applicable.
-- Aspect-Oriented Programming (AspectJ) for logging purposes.
-- Caching with Caffeine to improve caching performance.
+## Project Overall Structure
+The codebase consists of two versions of the application, named v1 and v2, each implementing a distinct architectural 
+approach. 
+- v1: This version is based on a simple layered architecture, where the service layer depends directly on the user 
+interface layer. During the development process, new user interface requirements emerged, revealing that the initial 
+design lacked the flexibility needed to accommodate these changes without modifying core business logic.
+
+- v2: To address this issue, v2 was developed using a hexagonal (ports and adapters) architecture. In this design, the 
+core business logic is decoupled from the user interface layer. Data is transferred between the interface layer and the 
+core logic via converter classes, which transform the incoming data into immutable Data Transfer Objects (DTOs) for use 
+within the core layer, and then convert the core layer’s output back into a format suitable for the interface.
+
+The v2 version is designed to ensure backward compatibility with v1, allowing to use both versions of user interface.
 
 ## Project Model with C4 Component Diagram
 ![C4_Container_view](v2/documentation/c4_diagrams/C4_Component_view.png)
+
+## Future Perspectives
+The course contains also the second part I am enrolled in, which incorporates such technologies as microservices, 
+Docker, RabbitMQ, Elastic, Prometheus, Grafana and more.
+
+Additionally, I am planning to update outdated or deprecated dependencies, including:
+- Migration from JDK 18 to JDK 21.
+- Migration from Spring Boot 2.7.5. to Spring Boot 3.3.1.
+- Migration from java.util.Date to java.time.
