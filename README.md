@@ -70,13 +70,115 @@ JPA implementations.
 The v2 version is designed to ensure backward compatibility with v1, allowing to use both versions of user interface.
 
 ## Version v2 Model with C4 Component Diagram
-![v2_C4_model_component_view](v2/documentation/c4_diagrams/v2_C4_model_component_view.png)
+![v2_C4_model_component_view](v2/documentation/c4_diagrams/v2_C4_model_component_view.png)<br>
 
 ## Future Perspectives
-The course contains also the second part I am enrolled in, which incorporates such technologies as microservices, 
-Docker, RabbitMQ, Elastic, Prometheus, Grafana and more.
+The course contains also the second part I am enrolled in, which incorporates technologies such as microservices, 
+Docker, RabbitMQ, Elastic, Prometheus, Grafana and other technologies.
 
 Additionally, I am planning to update outdated or deprecated dependencies, including:
-- Migration from JDK 18 to JDK 21.
+- Migration from JDK 17 to JDK 21.
 - Migration from Spring Boot 2.7.5. to Spring Boot 3.3.1.
 - Migration from java.util.Date to java.time.
+Also:
+- Externalize environment variables and test user credentials.
+- Add Spring Profiles for different environments.
+
+## How to Run the Project Locally
+### Important note:
+- `v1` module is initial (historical) version that is kept to demonstrate the evolution of the project.
+- `v2` module is the refactored and updated version that supports both v1 and v2 user interfaces.
+
+You should run `v2` module.
+
+### Prerequisites
+- Java Development Kit (JDK) 17 – it can be downloaded either within IDE (like IntelliJ IDEA, Eclipse) or manually - 
+[Download JDK 17 Here](https://aws.amazon.com/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
+- Gradle - only if you are running the project outside an IDE that handles Gradle automatically – 
+[Download Gradle Here](https://gradle.org/install/)
+<br>
+The project is configured to use an in-memory H2 database by default, requiring no additional setup.<br> 
+If you prefer using MySQL, it is also supported. For this, install and run MySQL 8.3 (optionally, use MySQL Workbench). 
+To switch to MySQL, update the v2 module's `application.properties` by uncommenting the MySQL settings and commenting out 
+the H2 settings. You will also need to configure the database and user credentials in your MySQL instance as specified 
+in the `application.properties`.
+
+### Steps to Run:
+1. Clone the repository and navigate to the project directory:<br>
+`git clone https://github.com/ElinaZoldnere/Insurance-Application-Part-1.git` <br>
+`cd Insurance-Application-Part-1`
+
+2. Open the project in your IDE (e.g., IntelliJ IDEA or Eclipse).
+
+3. Run the application:<br>
+In your IDE, locate the `InsuranceApplication` main class in the `v2` module and run it.
+
+4. Access the application:
+- REST API/POST v1: http://localhost:8080/insurance/travel/api/v1/
+- REST API/POST v2: http://localhost:8080/insurance/travel/api/v2/
+- REST API/GET:     http://localhost:8080/insurance/travel/api/internal/agreement/{agreement-uuid-here}
+- Web Interface v1: http://localhost:8080/insurance/travel/web/v1/
+- Web Interface v2: http://localhost:8080/insurance/travel/web/v2/
+
+REST API endpoints you can test via https://www.postman.com/ or Postman app on your local machine.<br>
+As endpoints are secured with Basic Authentication, you have to select `Basic Auth` and provide the username and 
+password in the request. Username: `admin` and password: `javaguru3` will work for all REST endpoints.<br>
+![Postman_Basic_Auth](assets/Postman_Basic_Auth.png)
+<br>
+<br>
+Example JSON for testing REST API/POST v1 at http://localhost:8080/insurance/travel/api/v1/
+```json
+{
+  "personFirstName": "Jānis",
+  "personLastName": "Bērziņš",
+  "personalCode": "123456-12345",
+  "personBirthDate": "1990-01-01",
+  "agreementDateFrom": "2025-03-10",
+  "agreementDateTo": "2025-03-11",
+  "selectedRisks": [
+    "TRAVEL_MEDICAL",
+    "TRAVEL_LOSS_BAGGAGE"
+  ],
+  "country": "SPAIN",
+  "medicalRiskLimitLevel": "LEVEL_15000"
+}
+```
+Example JSON for testing REST API/POST at http://localhost:8080/insurance/travel/api/v2/
+```json
+{
+  "agreementDateFrom": "2025-03-10",
+  "agreementDateTo": "2025-03-11",
+  "selectedRisks": ["TRAVEL_MEDICAL"],
+  "country": "SPAIN",
+  "persons": [
+    {
+      "personFirstName": "Jānis",
+      "personLastName": "Bērziņš",
+      "personalCode": "123456-12345",
+      "personBirthDate": "1990-01-01",
+      "medicalRiskLimitLevel": "LEVEL_15000"
+    },
+    {
+      "personFirstName": "Kārlis",
+      "personLastName": "Krūmiņš",
+      "personalCode": "234567-23456",
+      "personBirthDate": "1989-01-01",
+      "medicalRiskLimitLevel": "LEVEL_15000"
+    }
+  ]
+}
+```
+Please, take into account, the application supports limited number of countries, risk types and limit levels.<br>
+Some of the values you can use for testing:<br>
+Countries: "LATVIA", "SPAIN", "JAPAN".<br>
+Risk types: "TRAVEL_MEDICAL", "TRAVEL_CANCELLATION".<br>
+Medical risk limit levels: "LEVEL_5000", "LEVEL_10000", "LEVEL_15000".<br>
+<br>
+After performing at least one successful request, you can check the results in the H2 Console. Picking a valid agreement
+UUID from the table agreements, you can test the REST API/GET endpoint providing the UUID in the URL.
+- H2 Console: http://localhost:8080/h2-console/ (username: test, password: test)
+- REST API/GET:     http://localhost:8080/insurance/travel/api/internal/agreement/{agreement-uuid-here}
+
+The web interface can be tested filling in the form fields and submitting the request. No authentication required.<br> 
+- Web Interface v1: http://localhost:8080/insurance/travel/web/v1/
+- Web Interface v2: http://localhost:8080/insurance/travel/web/v2/
