@@ -92,11 +92,14 @@ Also:
 You should run `v2` module.
 
 ### Prerequisites
-- Java Development Kit (JDK) 17 – it can be downloaded either within IDE (like IntelliJ IDEA, Eclipse) or manually - 
-[Download JDK 17 Here](https://aws.amazon.com/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)
-- Gradle - only if you are running the project outside an IDE that handles Gradle automatically – 
+- **Java Development Kit (JDK) 17** – it can be downloaded either within IDE (like IntelliJ IDEA, Eclipse) or manually - 
+[Download JDK 17 Here](https://aws.amazon.com/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)<br>
+Ensure that the project SDK is set to JDK 17 in your IDE settings (e.g., Project Structure in IntelliJ IDEA).
+- **Gradle** - only if you are running the project outside an IDE that handles Gradle automatically – 
 [Download Gradle Here](https://gradle.org/install/)
-<br>
+- **Postman (Desktop App)** - to perform POST/GET requests to the REST API endpoints - 
+[Download Postman Here](https://www.postman.com/downloads/)
+
 The project is configured to use an in-memory H2 database by default, requiring no additional setup.<br> 
 If you prefer using MySQL, it is also supported. For this, install and run MySQL 8.3 (optionally, use MySQL Workbench). 
 To switch to MySQL, update the v2 module's `application.properties` by uncommenting the MySQL settings and commenting out 
@@ -105,8 +108,10 @@ in the `application.properties`.
 
 ### Steps to Run:
 1. Clone the repository and navigate to the project directory:<br>
-`git clone https://github.com/ElinaZoldnere/Insurance-Application-Part-1.git` <br>
-`cd Insurance-Application-Part-1`
+```bash
+git clone https://github.com/ElinaZoldnere/Insurance-Application-Part-1.git
+cd Insurance-Application-Part-1 
+```
 
 2. Open the project in your IDE (e.g., IntelliJ IDEA or Eclipse).
 
@@ -120,13 +125,13 @@ In your IDE, locate the `InsuranceApplication` main class in the `v2` module and
 - Web Interface v1: http://localhost:8080/insurance/travel/web/v1/
 - Web Interface v2: http://localhost:8080/insurance/travel/web/v2/
 
-REST API endpoints you can test via https://www.postman.com/ or Postman app on your local machine.<br>
+REST API endpoints you can test via Postman Desktop App.<br>
 As endpoints are secured with Basic Authentication, you have to select `Basic Auth` and provide the username and 
 password in the request. Username: `admin` and password: `javaguru3` will work for all REST endpoints.<br>
 ![Postman_Basic_Auth](assets/Postman_Basic_Auth.png)
 <br>
 <br>
-Example JSON for testing REST API/POST v1 at http://localhost:8080/insurance/travel/api/v1/
+Example JSON (request body content) for testing REST API/POST v1 at http://localhost:8080/insurance/travel/api/v1/
 ```json
 {
   "personFirstName": "Jānis",
@@ -143,7 +148,7 @@ Example JSON for testing REST API/POST v1 at http://localhost:8080/insurance/tra
   "medicalRiskLimitLevel": "LEVEL_15000"
 }
 ```
-Example JSON for testing REST API/POST at http://localhost:8080/insurance/travel/api/v2/
+Example JSON (request body content) for testing REST API/POST at http://localhost:8080/insurance/travel/api/v2/
 ```json
 {
   "agreementDateFrom": "2025-03-10",
@@ -175,7 +180,7 @@ Risk types: "TRAVEL_MEDICAL", "TRAVEL_CANCELLATION".<br>
 Medical risk limit levels: "LEVEL_5000", "LEVEL_10000", "LEVEL_15000".<br>
 <br>
 After performing at least one successful request, you can check the results in the H2 Console. Picking a valid agreement
-UUID from the table agreements, you can test the REST API/GET endpoint providing the UUID in the URL.
+UUID from the table **agreements**, you can test the REST API/GET endpoint providing the UUID in the URL.
 - H2 Console: http://localhost:8080/h2-console/ (username: test, password: test)
 - REST API/GET:     http://localhost:8080/insurance/travel/api/internal/agreement/{agreement-uuid-here}
 
