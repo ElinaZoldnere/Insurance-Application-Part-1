@@ -179,9 +179,10 @@ Countries: "LATVIA", "SPAIN", "JAPAN".<br>
 Risk types: "TRAVEL_MEDICAL", "TRAVEL_CANCELLATION".<br>
 Medical risk limit levels: "LEVEL_5000", "LEVEL_10000", "LEVEL_15000".<br>
 <br>
-After performing at least one successful request, you can check the results in the H2 Console. Picking a valid agreement
+After performing at least one successful request, you can check the results in the **H2 Console**. Picking a valid agreement
 UUID from the table **agreements**, you can test the REST API/GET endpoint providing the UUID in the URL.
-- H2 Console: http://localhost:8080/h2-console/ (username: test, password: test)
+- H2 Console: http://localhost:8080/h2-console/ <br>
+- JDBC URL: `jdbc:h2:mem:testdb`  User Name : `test`  Password : `test`
 - REST API/GET:     http://localhost:8080/insurance/travel/api/internal/agreement/{agreement-uuid-here}
 
 The web interface can be tested filling in the form fields and submitting the request. No authentication required.<br> 

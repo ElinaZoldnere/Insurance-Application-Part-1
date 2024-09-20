@@ -57,6 +57,9 @@ public class SecurityConfig {
                                 .antMatchers("/insurance/travel/web/**")
                                 .permitAll()
 
+                                .antMatchers("/h2-console/**")
+                                .permitAll()
+
                                 .antMatchers("/insurance/travel/api/v**")
                                 .hasAnyRole("EXTERNAL_USER", "INTERNAL_USER", "ADMIN")
 
@@ -64,6 +67,10 @@ public class SecurityConfig {
                                 .hasAnyRole("INTERNAL_USER", "ADMIN")
 
                                 .anyRequest().authenticated()
+                )
+                .headers(headers ->
+                        headers
+                                .frameOptions().sameOrigin()
                 )
                 .httpBasic();
         return http.build();
