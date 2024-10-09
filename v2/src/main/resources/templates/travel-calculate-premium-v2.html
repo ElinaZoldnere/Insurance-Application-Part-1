@@ -8,25 +8,25 @@
 
 <h1>Travel Insurance Premium Calculation</h1>
 
-<form action="#" th:action="@{/insurance/travel/web/v2}" th:object="${request}" method="post" autocomplete="off">
+<form action="#" th:action="@{/insurance/travel/web/v2}" th:object="${request}" method="post">
     <div>
         <label for="agreementDateFrom">Agreement Date From:</label>
-        <input type="date" id="agreementDateFrom" th:field="*{agreementDateFrom}" autocomplete="off"/>
+        <input type="date" id="agreementDateFrom" th:field="*{agreementDateFrom}"/>
     </div>
     <br>
     <div>
         <label for="agreementDateTo">Agreement Date To:</label>
-        <input type="date" id="agreementDateTo" th:field="*{agreementDateTo}" autocomplete="off"/>
+        <input type="date" id="agreementDateTo" th:field="*{agreementDateTo}"/>
     </div>
     <br>
     <div>
         <label for="country">Country:</label>
-        <input type="text" id="country" th:field="*{country}" autocomplete="off"/>
+        <input type="text" id="country" th:field="*{country}"/>
     </div>
     <br>
     <div>
         <label for="selectedRisks">Selected Risks:</label>
-        <textarea id="selectedRisks" th:field="*{selectedRisks}" autocomplete="off"></textarea>
+        <textarea id="selectedRisks" th:field="*{selectedRisks}"></textarea>
     </div>
     <br>
     <div id="persons-container">
@@ -35,33 +35,32 @@
             <h3>Person <span th:text="${personStat.index + 1}"></span></h3>
             <div>
                 <label for="personFirstName">First Name:</label>
-                <input type="text" th:field="*{persons[__${personStat.index}__].personFirstName}" autocomplete="off"/>
+                <input type="text" th:field="*{persons[__${personStat.index}__].personFirstName}"/>
             </div>
             <br>
             <div>
                 <label for="personLastName">Last Name:</label>
-                <input type="text" th:field="*{persons[__${personStat.index}__].personLastName}" autocomplete="off"/>
+                <input type="text" th:field="*{persons[__${personStat.index}__].personLastName}"/>
             </div>
             <br>
             <div>
                 <label for="personalCode">Personal Code:</label>
-                <input type="text" th:field="*{persons[__${personStat.index}__].personalCode}" autocomplete="off"/>
+                <input type="text" th:field="*{persons[__${personStat.index}__].personalCode}"/>
             </div>
             <br>
             <div>
                 <label for="personBirthDate">Birth Date:</label>
-                <input type="date" th:field="*{persons[__${personStat.index}__].personBirthDate}" autocomplete="off"/>
+                <input type="date" th:field="*{persons[__${personStat.index}__].personBirthDate}"/>
             </div>
             <br>
             <div>
                 <label for="medicalRiskLimitLevel">Medical Risk Limit Level:</label>
-                <input type="text" th:field="*{persons[__${personStat.index}__].medicalRiskLimitLevel}"
-                       autocomplete="off"/>
+                <input type="text" th:field="*{persons[__${personStat.index}__].medicalRiskLimitLevel}"/>
             </div>
             <br>
             <div>
                 <label for="travelCost">Travel Cost:</label>
-                <input type="text" th:field="*{persons[__${personStat.index}__].travelCost}" autocomplete="off"/>
+                <input type="text" th:field="*{persons[__${personStat.index}__].travelCost}"/>
             </div>
             <br>
             <button type="button" onclick="removePerson(this)">Remove Person</button>
@@ -119,32 +118,32 @@
                 <h3>Person ${index + 1}</h3>
                 <div>
                     <label for="persons[${index}].personFirstName">First Name:</label>
-                    <input type="text" id="persons[${index}].personFirstName" name="persons[${index}].personFirstName" autocomplete="off"/>
+                    <input type="text" id="persons[${index}].personFirstName" name="persons[${index}].personFirstName"/>
                 </div>
                 <br>
                 <div>
                     <label for="persons[${index}].personLastName">Last Name:</label>
-                    <input type="text" id="persons[${index}].personLastName" name="persons[${index}].personLastName" autocomplete="off"/>
+                    <input type="text" id="persons[${index}].personLastName" name="persons[${index}].personLastName"/>
                 </div>
                 <br>
                 <div>
                     <label for="persons[${index}].personalCode">Personal Code:</label>
-                    <input type="text" id="persons[${index}].personalCode" name="persons[${index}].personalCode" autocomplete="off"/>
+                    <input type="text" id="persons[${index}].personalCode" name="persons[${index}].personalCode"/>
                 </div>
                 <br>
                 <div>
                     <label for="persons[${index}].personBirthDate">Birth Date:</label>
-                    <input type="date" id="persons[${index}].personBirthDate" name="persons[${index}].personBirthDate" autocomplete="off"/>
+                    <input type="date" id="persons[${index}].personBirthDate" name="persons[${index}].personBirthDate"/>
                 </div>
                 <br>
                 <div>
                     <label for="persons[${index}].medicalRiskLimitLevel">Medical Risk Limit Level:</label>
-                    <input type="text" id="persons[${index}].medicalRiskLimitLevel" name="persons[${index}].medicalRiskLimitLevel" autocomplete="off"/>
+                    <input type="text" id="persons[${index}].medicalRiskLimitLevel" name="persons[${index}].medicalRiskLimitLevel"/>
                 </div>
                 <br>
                 <div>
                     <label for="persons[${index}].travelCost">Travel Cost:</label>
-                    <input type="text" id="persons[${index}].travelCost" name="persons[${index}].travelCost" autocomplete="off"/>
+                    <input type="text" id="persons[${index}].travelCost" name="persons[${index}].travelCost"/>
                 </div>
                 <br>
                 <button type="button" onclick="removePerson(this)">Remove Person</button>
