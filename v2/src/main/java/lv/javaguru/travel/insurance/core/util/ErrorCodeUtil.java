@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,14 +10,14 @@ import java.util.List;
 public class ErrorCodeUtil {
 
     @Autowired
-    private PropertyResolver resolver;
+    private Environment env;
 
     public String getErrorDescription(String errorCode) {
-        return resolver.getPropertyDescription(errorCode);
+        return env.getProperty(errorCode);
     }
 
     public String getErrorDescription(String errorCode, List<Placeholder> placeholders) {
-        String descriptionWithPlaceholders = resolver.getPropertyDescription(errorCode);
+        String descriptionWithPlaceholders = env.getProperty(errorCode);
         return replacePlaceholders(descriptionWithPlaceholders, placeholders);
     }
 

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.core.env.Environment;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import static org.mockito.Mockito.when;
 class ErrorCodeUtilTest {
 
     @Mock
-    private PropertyResolver resolverMock;
+    private Environment envMock;
 
     @InjectMocks
     private ErrorCodeUtil errorCodeUtil;
@@ -25,7 +26,7 @@ class ErrorCodeUtilTest {
         String errorCode = "ERROR_CODE";
         String expectedDescription = "Error description";
 
-        when(resolverMock.getPropertyDescription(errorCode)).thenReturn(expectedDescription);
+        when(envMock.getProperty(errorCode)).thenReturn(expectedDescription);
 
         String actualDescription = errorCodeUtil.getErrorDescription(errorCode);
 
@@ -38,7 +39,7 @@ class ErrorCodeUtilTest {
         String descriptionWithPlaceholders = "Error description {placeholder}";
         List<Placeholder> placeholders = List.of(new Placeholder("placeholder", "VALUE"));
 
-        when(resolverMock.getPropertyDescription(errorCode)).thenReturn(descriptionWithPlaceholders);
+        when(envMock.getProperty(errorCode)).thenReturn(descriptionWithPlaceholders);
 
         String actualDescription = errorCodeUtil.getErrorDescription(errorCode, placeholders);
 
@@ -49,7 +50,7 @@ class ErrorCodeUtilTest {
     void getErrorDescription_ShouldNotReturnDescriptionFromInvalidCode() {
         String errorCode = "INVALID_CODE";
 
-        when(resolverMock.getPropertyDescription(errorCode)).thenReturn(null);
+        when(envMock.getProperty(errorCode)).thenReturn(null);
 
         String actualDescription = errorCodeUtil.getErrorDescription(errorCode);
 
