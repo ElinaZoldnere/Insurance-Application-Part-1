@@ -26,3 +26,4 @@
 
 # Environment
 .env
+.envrc
